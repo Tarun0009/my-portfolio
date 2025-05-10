@@ -1,12 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaGithub, FaLinkedin, FaBars, FaTimes } from "react-icons/fa";
+import { useSwipeable } from "react-swipeable";
 import ProfilePic from "../images/img.png";
 
-function Navbar() {
-  const [isMobile, setIsMobile] = useState(false);
+const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
-  const toggleMenu = () => setIsMobile(!isMobile);
-  const closeMenuOnClick = () => setIsMobile(false);
+  const navItems = ["home", "about", "skills", "projects", "contact"];
+
+  // Toggle mobile menu
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+
+  // Swipe handlers for mobile menu
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => closeMobileMenu(),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
+
+  // Intersection Observer for active link highlighting
+  useEffect(() => {
+    const sections = document.querySelectorAll("section[id]");
+    const options = {
+      threshold: 0.3,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, options);
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
+  }, []);
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-gray-900 text-white shadow-md z-50">
@@ -21,11 +55,15 @@ function Navbar() {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-6 lg:space-x-8 text-sm font-medium">
-          {["home", "about", "skills", "projects", "contact"].map((item) => (
+          {navItems.map((item) => (
             <li key={item}>
               <a
                 href={`#${item}`}
-                className="text-gray-300 hover:text-cyan-400 transition-colors duration-200"
+                className={`${
+                  activeSection === item
+                    ? "text-cyan-400 border-b-2 border-cyan-400"
+                    : "text-gray-300"
+                } hover:text-cyan-400 transition-colors duration-200`}
               >
                 {item.charAt(0).toUpperCase() + item.slice(1)}
               </a>
@@ -37,32 +75,51 @@ function Navbar() {
         <button
           className="md:hidden text-2xl focus:outline-none"
           aria-label="Toggle Menu"
-          onClick={toggleMenu}
+          onClick={toggleMobileMenu}
         >
-          {isMobile ? <FaTimes /> : <FaBars />}
+          {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
         </button>
       </div>
 
       {/* Mobile Menu */}
-      {isMobile && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 flex flex-col items-center justify-center space-y-6 text-lg transition-all duration-300 md:hidden">
+      {isMobileMenuOpen && (
+        <div
+          {...swipeHandlers}
+          className="fixed inset-0 bg-black bg-opacity-90 flex flex-col items-center justify-center space-y-6 text-lg transition-all duration-300 md:hidden"
+        >
+          {/* Close Button */}
+          <button
+            className="absolute top-6 right-6 text-3xl text-gray-300 hover:text-cyan-400 transition-colors duration-200"
+            onClick={closeMobileMenu}
+            aria-label="Close Menu"
+          >
+            <FaTimes />
+          </button>
+
+          {/* Profile Image */}
           <img
             src={ProfilePic}
             alt="Profile"
             className="w-24 h-24 rounded-full border-4 border-cyan-400 mb-4"
           />
 
-          {["home", "about", "skills", "projects", "contact"].map((item) => (
+          {/* Navigation Links */}
+          {navItems.map((item) => (
             <a
               key={item}
               href={`#${item}`}
-              onClick={closeMenuOnClick}
-              className="text-gray-300 hover:text-cyan-400 transition-colors duration-200"
+              onClick={closeMobileMenu}
+              className={`${
+                activeSection === item
+                  ? "text-cyan-400 border-b-2 border-cyan-400"
+                  : "text-gray-300"
+              } hover:text-cyan-400 transition-colors duration-200`}
             >
               {item.charAt(0).toUpperCase() + item.slice(1)}
             </a>
           ))}
 
+          {/* Social Icons */}
           <div className="flex space-x-6 pt-4 text-2xl">
             <a
               href="https://github.com/Tarun0009"
@@ -87,6 +144,6 @@ function Navbar() {
       )}
     </nav>
   );
-}
+};
 
 export default Navbar;
