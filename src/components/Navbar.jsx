@@ -7,25 +7,20 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
-  const navItems = ["home", "about", "skills", "projects", "contact"];
+  const navItems = ["home", "about", "skills", "projects", "certificates", "contact"];
 
-  // Toggle mobile menu
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
-  // Swipe handlers for mobile menu
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => closeMobileMenu(),
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   });
 
-  // Intersection Observer for active link highlighting
   useEffect(() => {
     const sections = document.querySelectorAll("section[id]");
-    const options = {
-      threshold: 0.3,
-    };
+    const options = { threshold: 0.3 };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -37,9 +32,7 @@ const Navbar = () => {
 
     sections.forEach((section) => observer.observe(section));
 
-    return () => {
-      sections.forEach((section) => observer.unobserve(section));
-    };
+    return () => sections.forEach((section) => observer.unobserve(section));
   }, []);
 
   return (
@@ -71,7 +64,7 @@ const Navbar = () => {
           ))}
         </ul>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Toggle */}
         <button
           className="md:hidden text-2xl focus:outline-none"
           aria-label="Toggle Menu"
@@ -96,14 +89,14 @@ const Navbar = () => {
             <FaTimes />
           </button>
 
-          {/* Profile Image */}
+          {/* Profile Pic */}
           <img
             src={ProfilePic}
             alt="Profile"
             className="w-24 h-24 rounded-full border-4 border-cyan-400 mb-4"
           />
 
-          {/* Navigation Links */}
+          {/* Links */}
           {navItems.map((item) => (
             <a
               key={item}

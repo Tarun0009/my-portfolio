@@ -1,104 +1,57 @@
 import React from "react";
-import { FaReact, FaJsSquare, FaHtml5, FaCss3Alt, FaDatabase, FaBootstrap } from "react-icons/fa";
+import {
+  FaReact,
+  FaJsSquare,
+  FaHtml5,
+  FaCss3Alt,
+  FaDatabase,
+  FaBootstrap,
+} from "react-icons/fa";
 import { SiTailwindcss, SiMysql } from "react-icons/si";
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-20 bg-gray-50 text-gray-800">
-      <div className="container mx-auto px-4 text-center">
-        <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-teal-400">
+    <section id="skills" className="py-10 bg-[#0c0c0c] text-gray-100">
+      <div className="max-w-6xl mx-auto px-4 text-center">
+        <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">
           Skills
         </h2>
-        <p className="mt-4 text-lg max-w-2xl mx-auto text-gray-600">
-          Here are some of the tools and technologies I work with.
+        <p className="mt-2 text-sm sm:text-base text-gray-400 max-w-xl mx-auto">
+          Tools and technologies I use regularly in my development work.
         </p>
 
-        {/* Skills List */}
-        <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-10">
-          {/* React */}
-          <div className="flex flex-col items-center group p-4 rounded-lg shadow-lg hover:shadow-xl hover:bg-blue-500 hover:text-white transition-all duration-300">
-            <FaReact className="text-4xl" />
-            <p className="mt-2 text-lg">React</p>
-            <div className="w-full bg-gray-200 h-2 mt-2 rounded-full">
-              <div className="bg-blue-500 h-2 rounded-full" style={{ width: "95%" }}></div>
+        <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
+          {skills.map((skill, i) => (
+            <div
+              key={i}
+              className={`flex flex-col items-center text-sm sm:text-base group p-3 rounded-lg shadow-md border border-white/10 bg-black/80 hover:bg-${skill.color}-500 hover:text-white transition duration-300`}
+            >
+              <skill.icon className="text-3xl mb-1" />
+              <p className="mb-1 font-medium">{skill.name}</p>
+              <div className="w-full h-2 bg-gray-700 rounded-full">
+                <div
+                  className={`h-2 rounded-full bg-${skill.color}-500`}
+                  style={{ width: skill.level }}
+                ></div>
+              </div>
             </div>
-          </div>
-
-          {/* React Native */}
-          <div className="flex flex-col items-center group p-4 rounded-lg shadow-lg hover:shadow-xl hover:bg-indigo-500 hover:text-white transition-all duration-300">
-            <FaReact className="text-4xl" />
-            <p className="mt-2 text-lg">React Native</p>
-            <div className="w-full bg-gray-200 h-2 mt-2 rounded-full">
-              <div className="bg-indigo-500 h-2 rounded-full" style={{ width: "85%" }}></div>
-            </div>
-          </div>
-
-          {/* JavaScript */}
-          <div className="flex flex-col items-center group p-4 rounded-lg shadow-lg hover:shadow-xl hover:bg-yellow-500 hover:text-white transition-all duration-300">
-            <FaJsSquare className="text-4xl" />
-            <p className="mt-2 text-lg">JavaScript</p>
-            <div className="w-full bg-gray-200 h-2 mt-2 rounded-full">
-              <div className="bg-yellow-500 h-2 rounded-full" style={{ width: "100%" }}></div>
-            </div>
-          </div>
-
-          {/* HTML5 */}
-          <div className="flex flex-col items-center group p-4 rounded-lg shadow-lg hover:shadow-xl hover:bg-orange-500 hover:text-white transition-all duration-300">
-            <FaHtml5 className="text-4xl" />
-            <p className="mt-2 text-lg">HTML5</p>
-            <div className="w-full bg-gray-200 h-2 mt-2 rounded-full">
-              <div className="bg-orange-500 h-2 rounded-full" style={{ width: "100%" }}></div>
-            </div>
-          </div>
-
-          {/* CSS3 */}
-          <div className="flex flex-col items-center group p-4 rounded-lg shadow-lg hover:shadow-xl hover:bg-blue-500 hover:text-white transition-all duration-300">
-            <FaCss3Alt className="text-4xl" />
-            <p className="mt-2 text-lg">CSS3</p>
-            <div className="w-full bg-gray-200 h-2 mt-2 rounded-full">
-              <div className="bg-blue-500 h-2 rounded-full" style={{ width: "95%" }}></div>
-            </div>
-          </div>
-
-          {/* Tailwind CSS */}
-          <div className="flex flex-col items-center group p-4 rounded-lg shadow-lg hover:shadow-xl hover:bg-sky-500 hover:text-white transition-all duration-300">
-            <SiTailwindcss className="text-4xl" />
-            <p className="mt-2 text-lg">Tailwind CSS</p>
-            <div className="w-full bg-gray-200 h-2 mt-2 rounded-full">
-              <div className="bg-sky-500 h-2 rounded-full" style={{ width: "95%" }}></div>
-            </div>
-          </div>
-
-          {/* MySQL */}
-          <div className="flex flex-col items-center group p-4 rounded-lg shadow-lg hover:shadow-xl hover:bg-blue-500 hover:text-white transition-all duration-300">
-            <SiMysql className="text-4xl" />
-            <p className="mt-2 text-lg">MySQL</p>
-            <div className="w-full bg-gray-200 h-2 mt-2 rounded-full">
-              <div className="bg-blue-500 h-2 rounded-full" style={{ width: "100%" }}></div>
-            </div>
-          </div>
-
-          {/* Bootstrap */}
-          <div className="flex flex-col items-center group p-4 rounded-lg shadow-lg hover:shadow-xl hover:bg-purple-500 hover:text-white transition-all duration-300">
-            <FaBootstrap className="text-4xl" />
-            <p className="mt-2 text-lg">Bootstrap</p>
-            <div className="w-full bg-gray-200 h-2 mt-2 rounded-full">
-              <div className="bg-purple-500 h-2 rounded-full" style={{ width: "95%" }}></div>
-            </div>
-          </div>
-
-          {/* Java */}
-          <div className="flex flex-col items-center group p-4 rounded-lg shadow-lg hover:shadow-xl hover:bg-red-500 hover:text-white transition-all duration-300">
-            <FaDatabase className="text-4xl text-red-500" />
-            <p className="mt-2 text-lg">Java</p>
-            <div className="w-full bg-gray-200 h-2 mt-2 rounded-full">
-              <div className="bg-red-500 h-2 rounded-full" style={{ width: "100%" }}></div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
   );
 };
+
+const skills = [
+  { name: "React", icon: FaReact, level: "95%", color: "blue" },
+  { name: "React Native", icon: FaReact, level: "85%", color: "indigo" },
+  { name: "JavaScript", icon: FaJsSquare, level: "100%", color: "yellow" },
+  { name: "HTML5", icon: FaHtml5, level: "100%", color: "orange" },
+  { name: "CSS3", icon: FaCss3Alt, level: "95%", color: "blue" },
+  { name: "Tailwind CSS", icon: SiTailwindcss, level: "95%", color: "sky" },
+  { name: "MySQL", icon: SiMysql, level: "100%", color: "blue" },
+  { name: "Bootstrap", icon: FaBootstrap, level: "95%", color: "purple" },
+  { name: "Java", icon: FaDatabase, level: "100%", color: "red" },
+];
 
 export default Skills;

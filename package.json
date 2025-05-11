@@ -13,6 +13,8 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@react-pdf-viewer/core": "^3.12.0",
+    "@react-pdf-viewer/default-layout": "^3.12.0",
     "font-awesome": "^4.7.0",
     "framer-motion": "^12.10.5",
     "lucide-react": "^0.509.0",

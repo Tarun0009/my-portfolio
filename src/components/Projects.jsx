@@ -53,41 +53,33 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="py-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300"
+      className="py-8 px-4 bg-[#0c0c0c] text-white"
     >
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-800">
-            Projects
-          </h2>
-          <p className="mt-4 text-base sm:text-lg text-gray-700 max-w-2xl mx-auto">
-            Here are some of my featured web and app development projects,
-            highlighting my ability to design, build, and deploy full-stack
-            solutions.
+        <div className="text-center mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold">Projects</h2>
+          <p className="mt-2 text-sm sm:text-base text-gray-400 max-w-2xl mx-auto">
+            A selection of my recent web and mobile development work.
           </p>
         </div>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              className="group relative border rounded-2xl p-4 bg-white shadow-xl hover:shadow-2xl transition-transform transform hover:-translate-y-1"
-              initial={{ opacity: 0, y: 40 }}
+              className="group relative border border-white/10 rounded-xl p-3 bg-black/80 shadow-[0_0_10px_rgba(255,255,255,0.06)] hover:shadow-md transition-transform hover:-translate-y-1"
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
+              transition={{ duration: 0.4, delay: index * 0.15 }}
               viewport={{ once: true }}
             >
               <ImageWithSkeleton src={project.image} alt={project.title} />
 
-              <div className="mt-4">
-                <h3 className="text-lg sm:text-xl font-semibold text-gray-800">
-                  {project.title}
-                </h3>
-                <p className="mt-2 text-sm sm:text-base text-gray-600">
-                  {project.description}
-                </p>
+              <div className="mt-3">
+                <h3 className="text-base font-semibold">{project.title}</h3>
+                <p className="mt-2 text-sm text-gray-400">{project.description}</p>
 
-                <div className="flex flex-wrap gap-2 mt-3">
+                <div className="flex flex-wrap gap-2 mt-2">
                   {project.tech.split(", ").map((tech, i) => (
                     <span
                       key={i}
@@ -98,10 +90,10 @@ const Projects = () => {
                   ))}
                 </div>
 
-                <div className="mt-4">
+                <div className="mt-3">
                   <a
                     href={project.link}
-                    className="inline-block bg-blue-600 text-white px-4 py-2 text-sm rounded-md font-medium hover:bg-blue-700 transition"
+                    className="inline-block bg-blue-600 text-white px-4 py-1.5 text-xs sm:text-sm rounded-md hover:bg-blue-700 transition"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -121,9 +113,9 @@ const ImageWithSkeleton = ({ src, alt }) => {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className="w-full aspect-[4/3] relative bg-gray-200 rounded-xl overflow-hidden">
+    <div className="w-full aspect-[4/3] relative bg-gray-700 rounded-lg overflow-hidden">
       {!loaded && (
-        <div className="absolute inset-0 animate-pulse bg-gray-300" />
+        <div className="absolute inset-0 animate-pulse bg-gray-600" />
       )}
       <img
         src={src}
