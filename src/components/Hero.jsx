@@ -44,7 +44,7 @@ const Hero = () => {
         <p className="text-sm sm:text-md md:text-xl mt-2">
           <ReactTyped
             strings={[
-              "Web Developer | Java Developer",
+              "Full Stack Developer | Java Developer",
               "I create user-friendly web and mobile applications",
               "I enjoy coding and solving real-world problems"
             ]}

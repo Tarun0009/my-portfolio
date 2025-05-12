@@ -51,13 +51,12 @@ const projects = [
 
 const Projects = () => {
   return (
-    <section
-      id="projects"
-      className="py-8 px-4 bg-[#0c0c0c] text-white"
-    >
+    <section id="projects" className="py-10 px-4 sm:px-6 lg:px-12 bg-[#0c0c0c] text-white">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl sm:text-3xl font-bold">Projects</h2>
+        <div className="text-center mb-10">
+          <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">
+            Projects
+          </h2>
           <p className="mt-2 text-sm sm:text-base text-gray-400 max-w-2xl mx-auto">
             A selection of my recent web and mobile development work.
           </p>
@@ -67,7 +66,7 @@ const Projects = () => {
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              className="group relative border border-white/10 rounded-xl p-3 bg-black/80 shadow-[0_0_10px_rgba(255,255,255,0.06)] hover:shadow-md transition-transform hover:-translate-y-1"
+              className="group relative border border-white/10 rounded-xl p-3 bg-black/80 shadow-[0_0_10px_rgba(255,255,255,0.06)] hover:shadow-blue-500/10 hover:scale-[1.02] transition-transform transform"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.15 }}
@@ -83,7 +82,7 @@ const Projects = () => {
                   {project.tech.split(", ").map((tech, i) => (
                     <span
                       key={i}
-                      className="bg-blue-100 text-blue-600 text-xs font-medium px-2 py-1 rounded-full"
+                      className="bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full"
                     >
                       {tech}
                     </span>
@@ -113,14 +112,12 @@ const ImageWithSkeleton = ({ src, alt }) => {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className="w-full aspect-[4/3] relative bg-gray-700 rounded-lg overflow-hidden">
-      {!loaded && (
-        <div className="absolute inset-0 animate-pulse bg-gray-600" />
-      )}
+    <div className="w-full aspect-video relative bg-gray-700 rounded-lg overflow-hidden">
+      {!loaded && <div className="absolute inset-0 animate-pulse bg-gray-600" />}
       <img
         src={src}
         alt={alt}
-        className={`w-full h-full object-contain transition-opacity duration-500 ${
+        className={`w-full h-full object-cover transition-opacity duration-500 ${
           loaded ? "opacity-100" : "opacity-0"
         }`}
         onLoad={() => setLoaded(true)}
